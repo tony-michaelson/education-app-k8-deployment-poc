@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nfs-server
+  labels:
+    app: mpio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mpio
+  serviceName: "nfs"
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: storage
+        service: nfs
+    spec:
+      containers:
+        - name: nfs-server
+          image: "registry.digitalocean.com/masterypath/service-nfs:{{VERSION}}"
+          ports:
+            - name: nfs
+              containerPort: 2049
+            - name: mountd
+              containerPort: 20048
+            - name: rpcbind
+              containerPort: 111
+          env:
+          - name: SHARED_DIRECTORY
+            value: "/data"
+          - name: SYNC
+            value: "true"
+          securityContext: 
+              privileged: true
+          volumeMounts:
+          - mountPath: "/data"
+            name: nfs-block-storage
+            readOnly: false
+      volumes:
+        - name: nfs-block-storage
+          persistentVolumeClaim:
+            claimName: nfs-block-storage

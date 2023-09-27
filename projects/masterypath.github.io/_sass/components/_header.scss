@@ -1,0 +1,75 @@
+.header {
+  color: $primary;
+  background-color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // box-shadow: 0 1px 15px rgba(50, 50, 93, 0.2);
+  border-bottom: 1px solid $white-offset;
+  padding: 10px 0px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &.header-absolute {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+  }
+}
+.lock-scroll {
+  .header {
+    &.header-absolute {
+      position: static;
+    }
+  }
+}
+
+.the-problem-header {
+  height: 174px;
+  width: 100%;
+  background-image: url(/images/illustrations/the-problem-header.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.blue-header {
+  height: 149px;
+  width: 100%;
+  background-image: url(/images/illustrations/blue-header.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.blue-divider {
+  height: 194px;
+  width: 100%;
+  background-image: url(/images/illustrations/blue-divider.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.orange-divider {
+  height: 155px;
+  width: 100%;
+  background-image: url(/images/illustrations/orange-divider.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.black-divider {
+  height: 155px;
+  width: 100%;
+  background-image: url(/images/illustrations/black-divider.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.the-problem-footer {
+  height: 121px;
+  width: 100%;
+  background-image: url(/images/illustrations/divider-bottom-half-round.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

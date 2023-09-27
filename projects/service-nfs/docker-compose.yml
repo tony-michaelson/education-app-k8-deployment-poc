@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nfs_server:
+    image: masterypath/service-nfs:latest
+    privileged: true
+    hostname: server.nfs.local
+    networks:
+      - nfs
+    environment:
+      SHARED_DIRECTORY: "/data"
+      SYNC: "true"
+
+  nfs_client:
+    image: code.solern.com:5050/masterypath/devops-build-container:latest
+    privileged: true
+    hostname: client.nfs.local
+    networks:
+      - nfs
+    command: ["sleep", "infinity"]
+    depends_on:
+      - nfs_server
+
+networks:
+  nfs:

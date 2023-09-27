@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pgweb
+  labels:
+    app: mpio
+    service: pgweb
+spec:
+  containers:
+    - name: pgweb
+      image: "sosedoff/pgweb"
+      ports:
+        - containerPort: 8081
+      env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: api
+              key: DATABASE_URL

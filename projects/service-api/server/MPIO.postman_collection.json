@@ -1,0 +1,2062 @@
+{
+	"info": {
+		"_postman_id": "42a434f2-7f4b-460e-9c7e-64b4e5acbf54",
+		"name": "MPIO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Maps",
+			"item": [
+				{
+					"name": "Maps",
+					"item": [
+						{
+							"name": "Get All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"returnRights\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights"
+									]
+								},
+								"description": "Get all mapRights for a mapID"
+							},
+							"response": []
+						},
+						{
+							"name": "GetByID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"returnRights\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}"
+									]
+								},
+								"description": "Get a mapRight by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Map List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/mymaps",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"mymaps"
+									]
+								},
+								"description": "Get a list of all the member's maps."
+							},
+							"response": []
+						},
+						{
+							"name": "Map Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"My First Map 2\",\n  \"description\": \"My first mind map\",\n  \"mode\": \"na\",\n  \"cost\": 1.5\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/mymaps",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"mymaps"
+									]
+								},
+								"description": "Create a new Mind Map"
+							},
+							"response": []
+						},
+						{
+							"name": "Map Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}"
+									]
+								},
+								"description": "Get a Mind Map by the mapID / segmentID. This will only provide the nodes for a given segmentID."
+							},
+							"response": []
+						},
+						{
+							"name": "Breadcrumb Trail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/breadcrumb",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"breadcrumb"
+									]
+								},
+								"description": "Get a Mind Map by the mapID / segmentID. This will only provide the nodes for a given segmentID."
+							},
+							"response": []
+						},
+						{
+							"name": "Map Page (preview)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/page",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"page"
+									]
+								},
+								"description": "Get an HTML page for the mind map."
+							},
+							"response": []
+						},
+						{
+							"name": "Map Export",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/export",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"export"
+									]
+								},
+								"description": "Get a Mind Map export by the mapID."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Nodes",
+					"item": [
+						{
+							"name": "Node Patch",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"returnNode\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}"
+									]
+								},
+								"description": "Update a node"
+							},
+							"response": []
+						},
+						{
+							"name": "Node Make SubMap",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/makeSubMap",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"makeSubMap"
+									]
+								},
+								"description": "Make the nodeID it's own Mind Map with a link to the new mapID in its place"
+							},
+							"response": []
+						},
+						{
+							"name": "Node Attributes Patch",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"collapsed\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/attributes",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"attributes"
+									]
+								},
+								"description": "Patch node attributes"
+							},
+							"response": []
+						},
+						{
+							"name": "Node Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}"
+									]
+								},
+								"description": "Delete a node"
+							},
+							"response": []
+						},
+						{
+							"name": "Node Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":             \"Science Flashcard\",\n\t\"parentID\":         \"ad81a5bb-8421-402f-91ed-d6149ac0ec61\",\n\t\"nodeType\":         \"flashcard\",\n\t\"nodeNumber\":\t\t 8,\n\t\"order\":             1\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node"
+									]
+								},
+								"description": "Create a new node"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Flashcards",
+					"item": [
+						{
+							"name": "Create Basic Card",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"flashcardTypeID\": \"{{basicFlashcard}}\",\n\t\"question\": \"What is my favorite gas?\",\n\t\"answers\": [{\"correct\": true, \"answer\": \"Answer Choice 1\"}, {\"correct\": true, \"answer\": \"Answer Choice 2\"}, {\"correct\": false, \"answer\": \"Answer Choice 3\"}]\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/card?cardType=basic",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"card"
+									],
+									"query": [
+										{
+											"key": "cardType",
+											"value": "basic"
+										}
+									]
+								},
+								"description": "Create a new basic flashcard"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Code Exercise",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"flashcardTypeID\": \"{{codeExerciseFlashcard}}\",\n\t\"question\": \"What is my favorite gas?\",\n\t\"answers\": [{\"correct\": true, \"answer\": \"Answer Choice 1\"}, {\"correct\": true, \"answer\": \"Answer Choice 2\"}, {\"correct\": false, \"answer\": \"Answer Choice 3\"}]\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/card?cardType=code_exercise",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"card"
+									],
+									"query": [
+										{
+											"key": "cardType",
+											"value": "code_exercise"
+										}
+									]
+								},
+								"description": "Create a new code exercise type flashcard"
+							},
+							"response": []
+						},
+						{
+							"name": "List Flashcard Types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/flashcardTypes",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"flashcardTypes"
+									]
+								},
+								"description": "Get a list of all available flashcard types"
+							},
+							"response": []
+						},
+						{
+							"name": "Card Details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/card",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"card"
+									]
+								},
+								"description": "Get the flashcard details for an associated nodeID"
+							},
+							"response": []
+						},
+						{
+							"name": "Card Type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/cardType",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"cardType"
+									]
+								},
+								"description": "Get the card type of a nodeID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Basic Card",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"cardID\": \"{{nodeID}}\",\n\t\"flashcardTypeID\": \"{{basicFlashcard}}\",\n\t\"question\": \"What is my favorite star?\",\n\t\"answers\": [{\"correct\": true, \"answer\": \"Answer Choice 1\"}, {\"correct\": true, \"answer\": \"Answer Choice 2\"}, {\"correct\": false, \"answer\": \"Answer Choice 3\"}]\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/card?cardType=basic",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"card"
+									],
+									"query": [
+										{
+											"key": "cardType",
+											"value": "basic"
+										}
+									]
+								},
+								"description": "Update a basic flashcard"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Code Exercise",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"solution\": \"solution\",\n    \"test\": \"test\",\n    \"explanation\": \"explanation\",\n    \"explanationHtml\": \"explanation html\",\n    \"template\": \"template\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/card?cardType=code_exercise",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"card"
+									],
+									"query": [
+										{
+											"key": "cardType",
+											"value": "code_exercise"
+										}
+									]
+								},
+								"description": "Update a code exercise flashcard"
+							},
+							"response": []
+						},
+						{
+							"name": "Validate Code Exercise",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"flashcardTypeID\": \"8e5918f8-89bf-4371-9999-3856d63700ab\",\n\t\"test\": \"object Test extends App {\\r\\n  val result = Hello.run()\\r\\n  if (result == \\\"HI\\\") {\\r\\n    println(\\\"All tests passed.\\\")\\r\\n  } else {\\r\\n    println(\\\"fail\\\")\\r\\n  }\\r\\n}\\r\\n\",\n\t\"solution\": \"object Hello {\\r\\n  def run() = {\\r\\n    \\\"HI\\\"\\r\\n  }\\r\\n}\\r\\n\",\n\t\"template\": \"object Hello {\\r\\n}\\r\\n\",\n\t\"explanation\": \"hi\",\n\t\"explanationHtml\": \"<h5>hi</h5>\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/card/validate?cardType=code_exercise",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"card",
+										"validate"
+									],
+									"query": [
+										{
+											"key": "cardType",
+											"value": "code_exercise"
+										}
+									]
+								},
+								"description": "Validate the code exercise (usually before saving)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Blog Posts",
+					"item": [
+						{
+							"name": "Blog Post Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"markdown\": \"# Colors are bright!\",\n\t\"html\": \"<h1>Colors are bright!</h1>\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/post",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"post"
+									]
+								},
+								"description": "Create a new blog post"
+							},
+							"response": []
+						},
+						{
+							"name": "Blog Post Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"markdown\": \"# Colors are bright and true!\",\n\t\"html\": \"<h1>Colors are bright and true!</h1>\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/post",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"post"
+									]
+								},
+								"description": "Update a blog post"
+							},
+							"response": []
+						},
+						{
+							"name": "Blog Post Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/post",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"post"
+									]
+								},
+								"description": "Get a blog post"
+							},
+							"response": []
+						},
+						{
+							"name": "Blog Post Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/segment/{{segmentID}}/node/{{nodeID}}/post",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"segment",
+										"{{segmentID}}",
+										"node",
+										"{{nodeID}}",
+										"post"
+									]
+								},
+								"description": "Delete a blog post"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rights",
+					"item": [
+						{
+							"name": "Add Member",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}/member/{{profileID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}",
+										"member",
+										"{{profileID}}"
+									]
+								},
+								"description": "Link a profileID to a mapRightsID"
+							},
+							"response": []
+						},
+						{
+							"name": "Invite",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"emailAddress\": \"tonymichaelson@protonmail.com\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}/invite",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}",
+										"invite"
+									]
+								},
+								"description": "Link a profileID to a mapRightsID"
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Member",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"returnRights\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}/member/{{profileID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}",
+										"member",
+										"{{profileID}}"
+									]
+								},
+								"description": "Remove member from a mapRightsID"
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n            \"name\": \"Manual Test\",\n            \"admin\": false,\n            \"feedback\": true,\n            \"mnemonics\": true,\n            \"modify\": true,\n            \"permissions\": true,\n            \"publish\": true,\n            \"share\": true,\n            \"stats\": true,\n            \"training\": true,\n            \"transfer\": true,\n            \"view\": true\n        }"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights"
+									]
+								},
+								"description": "Create new mapRights for a Mind Map"
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"admin\": true,\n  \"returnRights\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}"
+									]
+								},
+								"description": "Patch a mapRight by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Rights for ProfileID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"returnRights\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/myrights",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"myrights"
+									]
+								},
+								"description": "Get all mapRights for a mapID & ProfileID"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/map/{{mapID}}/rights/{{mapRightsID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"map",
+										"{{mapID}}",
+										"rights",
+										"{{mapRightsID}}"
+									]
+								},
+								"description": "Delete a mapRight by ID"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Training",
+			"item": [
+				{
+					"name": "Get Flashcards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/segment/{{segmentID}}/cards",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"segment",
+								"{{segmentID}}",
+								"cards"
+							]
+						},
+						"description": "Get a list of all flashcards for a Mind Map (usuall before a training sesson)"
+					},
+					"response": []
+				},
+				{
+					"name": "Card Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/card/{{nodeID}}/cardType",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"card",
+								"{{nodeID}}",
+								"cardType"
+							]
+						},
+						"description": "Get the card type of a nodeID"
+					},
+					"response": []
+				},
+				{
+					"name": "Card Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/card/{{nodeID}}",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"card",
+								"{{nodeID}}"
+							]
+						},
+						"description": "Get the flashcard details for an associated nodeID"
+					},
+					"response": []
+				},
+				{
+					"name": "Grade Basic Answer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"choices\": [\"7b492f7c-d861-4e91-b20b-4d8ab3c68caa\", \"5e95aaa7-3982-4b69-9ad7-bc990737712d\"]\n}"
+						},
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/card/{{nodeID}}/grade?cardType=basic",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"card",
+								"{{nodeID}}",
+								"grade"
+							],
+							"query": [
+								{
+									"key": "cardType",
+									"value": "basic"
+								}
+							]
+						},
+						"description": "Grade a basic flashcard answer"
+					},
+					"response": []
+				},
+				{
+					"name": "Grade Code Exercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": \"object Hello {\\r\\n  def run() = {\\r\\n    \\\"HI\\\"\\r\\n  }\\r\\n}\\r\\n\"\n}"
+						},
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/card/{{nodeID}}/grade?cardType=code_exercise",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"card",
+								"{{nodeID}}",
+								"grade"
+							],
+							"query": [
+								{
+									"key": "cardType",
+									"value": "code_exercise"
+								}
+							]
+						},
+						"description": "Grade the code exercise"
+					},
+					"response": []
+				},
+				{
+					"name": "Easiness Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"quality\": 1\n}"
+						},
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/card/{{nodeID}}/quality",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"card",
+								"{{nodeID}}",
+								"quality"
+							]
+						},
+						"description": "Update the easiness factor of a flastcard"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog Read Times List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/postsReadTimes",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"postsReadTimes"
+							]
+						},
+						"description": "Get the timestamps of last time read for all blog posts in the Mind Map"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog Post Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/post/{{nodeID}}",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"post",
+								"{{nodeID}}"
+							]
+						},
+						"description": "Get a blog post"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog Post Mark Read",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiHost}}/org/{{orgID}}/train/{{mapID}}/post/{{nodeID}}/markRead",
+							"host": [
+								"{{apiHost}}"
+							],
+							"path": [
+								"org",
+								"{{orgID}}",
+								"train",
+								"{{mapID}}",
+								"post",
+								"{{nodeID}}",
+								"markRead"
+							]
+						},
+						"description": "Update the easiness factor of a flastcard"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Blog",
+					"item": [
+						{
+							"name": "Get Site",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Site",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subDomain\": \"michaelsonstudios\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog"
+									]
+								},
+								"description": "Use an inviteID to join a member to an organization or access a mind map"
+							},
+							"response": []
+						},
+						{
+							"name": "Patch Site",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"theme\": \"memoirs\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog"
+									]
+								},
+								"description": "Use an inviteID to join a member to an organization or access a mind map"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Site",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog"
+									]
+								},
+								"description": "Use an inviteID to join a member to an organization or access a mind map"
+							},
+							"response": []
+						},
+						{
+							"name": "Build",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog/build",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog",
+										"build"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Publish",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/blog/publish",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"blog",
+										"publish"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Organizations",
+					"item": [
+						{
+							"name": "Create Org",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Dummy Org 3\",\n    \"domain\": \"dummyorg3.com\",\n    \"familyPlan\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiHost}}/org",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org"
+									]
+								},
+								"description": "Use an inviteID to join a member to an organization or access a mind map"
+							},
+							"response": []
+						},
+						{
+							"name": "Config",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/config",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"config"
+									]
+								},
+								"description": "Get organization config"
+							},
+							"response": []
+						},
+						{
+							"name": "Config",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"memberMonthlyCost\": 20.99\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/config",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"config"
+									]
+								},
+								"description": "Patch organization config"
+							},
+							"response": []
+						},
+						{
+							"name": "Members",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/members",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"members"
+									]
+								},
+								"description": "Get all organization members"
+							},
+							"response": []
+						},
+						{
+							"name": "Member",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/member/{{profileID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"member",
+										"{{profileID}}"
+									]
+								},
+								"description": "Delete a member from the organization (this will remove from all roles)"
+							},
+							"response": []
+						},
+						{
+							"name": "Invite Join",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/invite/2b8d425d-b28e-424d-87a1-fbd73c617f24/join",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"invite",
+										"2b8d425d-b28e-424d-87a1-fbd73c617f24",
+										"join"
+									]
+								},
+								"description": "Use an inviteID to join a member to an organization or access a mind map"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Members",
+					"item": [
+						{
+							"name": "Member Profile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status test\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/member/profile",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"member",
+										"profile"
+									]
+								},
+								"description": "Get a description of the member's profile."
+							},
+							"response": []
+						},
+						{
+							"name": "Log Member Signin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/member/logSignIn",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"member",
+										"logSignIn"
+									]
+								},
+								"description": "Create a record of a member login"
+							},
+							"response": []
+						},
+						{
+							"name": "Register Member",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Ross\",\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik1ESXlOelEyUmpjd01rVkNSa1kxUXpnME5rVkVPVFJFTURKQlFqYzBNa1pETVRkRk1FVkVRdyJ9.eyJpc3MiOiJodHRwczovL21hc3RlcnlwYXRoLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTlkMTAxZjY4MDEwZDBjNWFiOTY2OGYiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiaHR0cHM6Ly9tYXN0ZXJ5cGF0aC5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNTkyNTEwMTUyLCJleHAiOjE1OTI1OTY1NTIsImF6cCI6Im9VUDRhcGh1THB3MnlkQmc4eFlLNVlIMVAzdGt1TGpzIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCBhZGRyZXNzIHBob25lIiwiZ3R5IjoicGFzc3dvcmQifQ.D73pN0IVW_zbguTWg6-TdMZlRSRYgJiulVYMfAHdHlfSpB8gGUWTVPo5-t2qDUsogLMd0dOAJ9ZtSwd3XS4sqgC-HMEZQEBNMXHBbGbqwk6IFmX4CcYAOQxx6yxxZixG3pAaZ28JzRS5FGexB8my4rnpGAM0OC-YUXG1DNndlZzYDcFVRXx3M2qyCfFZ7pbqRmq3i_I5ilxHaj9rkINlxFtcph6Vn9IF816jWK7-s69HwDHaeJvw75eL_iXBXeMcjeA4ekuYsZDVoaLoCo17hO4WVW3hUdykNpvPMNzoJTw547MXXbcDN0nQ-uZ9gxY-B0bnx79_L_7awzwRfORy5A\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/member/register",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"member",
+										"register"
+									]
+								},
+								"description": "Register a new member using their idToken"
+							},
+							"response": []
+						},
+						{
+							"name": "Member Organizations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/member/organizations",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"member",
+										"organizations"
+									]
+								},
+								"description": "Get all organizations profile is a member of"
+							},
+							"response": []
+						},
+						{
+							"name": "Get My Permissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/mypermissions",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"mypermissions"
+									]
+								},
+								"description": "Get all organizations profile is a member of"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "Create Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"testing 123\",\n\t\"blogApprove\": \"true\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role"
+									]
+								},
+								"description": "Create a new organization role"
+							},
+							"response": []
+						},
+						{
+							"name": "Patch Role",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mapTraining\": true\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}"
+									]
+								},
+								"description": "Update an organization role"
+							},
+							"response": []
+						},
+						{
+							"name": "Role",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}"
+									]
+								},
+								"description": "Get an organization role by the roleID"
+							},
+							"response": []
+						},
+						{
+							"name": "Roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/roles",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"roles"
+									]
+								},
+								"description": "Get all organization roles"
+							},
+							"response": []
+						},
+						{
+							"name": "Role Members",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}/members",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}",
+										"members"
+									]
+								},
+								"description": "Get members of an organization role"
+							},
+							"response": []
+						},
+						{
+							"name": "Add Role Member",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}/member/e4bf2de7-bb3e-485d-a99b-18f450eb458b",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}",
+										"member",
+										"e4bf2de7-bb3e-485d-a99b-18f450eb458b"
+									]
+								},
+								"description": "Add a member to a Role"
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Role Member",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}/member/fea1fd3e-85cc-43af-b62f-25ec0419620f",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}",
+										"member",
+										"fea1fd3e-85cc-43af-b62f-25ec0419620f"
+									]
+								},
+								"description": "Remove a member from a Role"
+							},
+							"response": []
+						},
+						{
+							"name": "Invite Link",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"emailAddress\": \"tonymichaelson@protonmail.com\"\n}"
+								},
+								"url": {
+									"raw": "{{apiHost}}/org/{{orgID}}/role/{{roleID}}/invite",
+									"host": [
+										"{{apiHost}}"
+									],
+									"path": [
+										"org",
+										"{{orgID}}",
+										"role",
+										"{{roleID}}",
+										"invite"
+									]
+								},
+								"description": "Create an invite link for an external member to join an organization role"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik1ESXlOelEyUmpjd01rVkNSa1kxUXpnME5rVkVPVFJFTURKQlFqYzBNa1pETVRkRk1FVkVRdyJ9.eyJpc3MiOiJodHRwczovL21hc3RlcnlwYXRoLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTlkMTAxZjY4MDEwZDBjNWFiOTY2OGYiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJpYXQiOjE2MjQzNzkxOTAsImV4cCI6MTYyNDQ2NTU5MCwiYXpwIjoib1VQNGFwaHVMcHcyeWRCZzh4WUs1WUgxUDN0a3VManMiLCJndHkiOiJwYXNzd29yZCJ9.d15CKS7-LWI0O7KkLXuOXlYbqjMHoP8HhsDQcj4uXfng7NnZ0XOg5MXqJOeL0PkJO2gvTUzf1W2JmIW4_BwJGYh7aJAfsPfavxDd3YZxbnszcKoUxHYmapYHt4dBx6ckwz5YAhnFt2g3BIXPCHVzsug52LVsJJiplhWlpwEjg-QAx9UCV60WYmJapCl0or5i_Daf2kMmsqWcRyzOfjgBvbvg2zQKUVstE-vV9t026QdGMEma8YwCEyqu7WqTLIpmj4kW0GI5ioNS1Awe1f8WaubPq1cIRKnEI0s_Fhut35wiL2IqnhD1v5CuL7RwD8TxOoch83gP_JS0iZzhSg-sZw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiHost",
+			"value": "http://localhost:9000"
+		},
+		{
+			"key": "jekyllApiHost",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "orgID",
+			"value": "57d00d57-28de-410c-b1cf-d97c4ccba08d"
+		},
+		{
+			"key": "basicFlashcard",
+			"value": "8e5918f8-89bf-4371-9999-3856d63700ac"
+		},
+		{
+			"key": "codeExerciseFlashcard",
+			"value": "8e5918f8-89bf-4371-9999-3856d63700ab"
+		},
+		{
+			"key": "mapID",
+			"value": "7f28e7fd-6384-4ce0-967f-ad882a7e4282"
+		},
+		{
+			"key": "segmentID",
+			"value": "dcfbadf3-6a5f-4573-bee1-86c45667674d"
+		},
+		{
+			"key": "nodeID",
+			"value": "ad81a5bb-8421-402f-91ed-d6149ac0ec61"
+		},
+		{
+			"key": "roleID",
+			"value": "77a4090c-840d-4428-ae68-fd2a7dd781d9"
+		},
+		{
+			"key": "mapRightsID",
+			"value": "4cb6f94d-58a4-43a3-9c4a-f6a5827fbb73"
+		},
+		{
+			"key": "profileID",
+			"value": "fea1fd3e-85cc-43af-b62f-25ec0419620f"
+		}
+	]
+}

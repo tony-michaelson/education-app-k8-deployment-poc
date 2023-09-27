@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: mpio
+spec:
+  selector:
+    matchLabels:
+      app: mpio
+  template:
+    metadata:
+      labels:
+        app: mpio
+        service: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: "{{IMAGE_PREFIX}}masterypath.io/service-mq:{{VERSION}}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_USERNAME
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_PASSWORD
+            # -- end secret key ref -- #

@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-sites
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-sites
+  mountOptions:
+    - hard
+    - nfsvers=4.2
+  nfs:
+    path: /sites
+    server: {{NFS_SERVICE_IP}}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-conf
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-conf
+  mountOptions:
+    - hard
+    - nfsvers=4.2
+  nfs:
+    path: /conf
+    server: {{NFS_SERVICE_IP}}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-docker-images
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-docker-images
+  mountOptions:
+    - hard
+    - nfsvers=4.2
+  nfs:
+    path: /docker-images
+    server: {{NFS_SERVICE_IP}}

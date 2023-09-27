@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: mpio
+spec:
+  selector:
+    service: postgresql
+  ports:
+    - name: pgsql
+      port: 5432
+      targetPort: 5432
+  type: LoadBalancer

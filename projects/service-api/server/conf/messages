@@ -1,0 +1,32 @@
+error.email = Valid email required
+error.required = This field is required
+access.denied = Access denied!
+could.not.authenticate = Could not authenticate with social provider! Please try again!
+
+home.title = Silhouette - Home
+
+toggle.navigation = Toggle navigation
+welcome.signed.in = Welcome, you are now signed in!
+
+error = Error!
+info = Info!
+success = Success!
+home = Home
+first.name = First name
+last.name = Last name
+full.name = Full name
+email = Email
+sign.in = Sign in
+sign.out = Sign out
+
+##########
+# Emails
+##########
+
+email.from = Silhouette <noreply@mohiva.com>
+
+# Sign Up
+email.sign.up.subject = Welcome
+email.sign.up.hello = Hello {0},
+email.sign.up.html.text = Please follow <a href="{0}">this link</a> to confirm and activate your new account.
+email.sign.up.txt.text = Please follow the link to confirm and activate your new account: {0}

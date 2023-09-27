@@ -1,0 +1,183 @@
+# BEGIN NOTES #
+# 1). Must change the local directories in the volume mounts
+# END NOTES #
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mpio-api
+  labels:
+    app: mpio
+spec:
+  selector:
+    matchLabels:
+      app: mpio
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: web
+        service: api
+    spec:
+      containers:
+        - name: api
+          image: "{{IMAGE_PREFIX}}masterypath.io/service-api:latest"
+          imagePullPolicy: IfNotPresent
+          command: ["bash"]
+          args: ["-c", "sleep infinity"]
+          ports:
+            - containerPort: 9000
+            - containerPort: 5555
+          env:
+            - name: SENDGRID_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: sendgrid
+                  key: SENDGRID_APIKEY
+            - name: AUTH0_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: auth0
+                  key: AUTH0_CLIENT_ID
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth0
+                  key: AUTH0_CLIENT_SECRET
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: password
+            - name: MQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_USERNAME
+            - name: MQ_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_PASSWORD
+            - name: DO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: digitalocean
+                  key: DO_SECRET_KEY
+            # -- end secretKeyRef -- #
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: GOOGLE_APPLICATION_CREDENTIALS
+            - name: GCS_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: GCS_PROJECT_ID
+            - name: GCS_IMAGE_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: GCS_IMAGE_BUCKET
+            - name: GCS_AUDIO_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: GCS_AUDIO_BUCKET
+            - name: SITES_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: SITES_URL
+            - name: SITES_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: SITES_DOMAIN
+            - name: CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: CLIENT_URL
+            - name: MQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: MQ_HOST
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: POSTGRES_HOST
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: POSTGRES_DB
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: POSTGRES_PORT
+            - name: AUTH0_REDIRECT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: AUTH0_REDIRECT_URL
+            - name: AUTH0_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: AUTH0_AUDIENCE
+            - name: AUTH0_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: AUTH0_DOMAIN
+            - name: DO_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: DO_ACCESS_KEY
+            - name: DO_IMAGE_SPACE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: DO_IMAGE_SPACE_ENDPOINT
+            - name: DO_IMAGE_SPACE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: DO_IMAGE_SPACE_NAME
+            - name: DO_AUDIO_SPACE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: DO_AUDIO_SPACE_ENDPOINT
+            - name: DO_AUDIO_SPACE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: DO_AUDIO_SPACE_NAME
+          volumeMounts:
+          - name: api-code
+            mountPath: "/app"
+          - name: sites
+            mountPath: "/sites"
+            readOnly: false
+      volumes:
+      - name: api-code
+        hostPath:
+          #################################
+          # Change to your code directory #
+          #################################
+          path: {{CODE_DIR}}
+          type: Directory
+      - name: sites
+        persistentVolumeClaim:
+          claimName: nfs-sites-pvc

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nfs-server
+  labels:
+    app: mpio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mpio
+  serviceName: "nfs"
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: storage
+        service: nfs
+    spec:
+      containers:
+        - name: nfs-server
+          image: "{{IMAGE_PREFIX}}masterypath.io/service-nfs:{{VERSION}}"
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            postStart:
+              exec:
+                command: [ "/bin/bash", "-c", "while true; do if grep -E '/data-host' <<< `df`; then cp -r /data-host/* /data/; break; else echo 'waiting for NFS mounts ...' && sleep 1; fi; done" ]
+            preStop:
+              exec:
+                command: [ "/bin/bash", "-c",  "rm -r /data-host/* && cp -r /data/* /data-host/"]
+          ports:
+            - name: nfs
+              containerPort: 2049
+            - name: mountd
+              containerPort: 20048
+            - name: rpcbind
+              containerPort: 111
+          env:
+          - name: SHARED_DIRECTORY
+            value: "/data"
+          - name: SYNC
+            value: "true"
+          securityContext: 
+              privileged: true
+          volumeMounts:
+          - mountPath: "/data"
+            name: nfsdata
+            readOnly: false
+          - mountPath: "/data-host"
+            name: hostdata
+            readOnly: false
+      volumes:
+      - name: nfsdata
+        emptyDir: {}
+        # bug causing operation not permitted on file create with hostPath
+      - name: hostdata
+        hostPath:
+          path: {{NFS_DATA_FOLDER}}
+          type: Directory

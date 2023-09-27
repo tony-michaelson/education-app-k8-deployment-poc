@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  labels:
+    app: mpio
+spec:
+  selector:
+    service: rabbitmq
+  ports:
+    - name: rabbitmq
+      port: 5672
+      targetPort: 5672

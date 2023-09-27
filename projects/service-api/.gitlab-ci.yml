@@ -1,0 +1,108 @@
+variables:
+  ASSEMBLY_POINT: "${CI_PROJECT_DIR}/server/target/universal/"
+  REACT_BUILD_DIR: "${CI_PROJECT_DIR}/client/build/"
+
+server-build-job:
+  stage: build
+  image:
+    name: hseeberger/scala-sbt:11.0.10-oraclelinux8_1.5.1_3.0.0-RC3
+  services:
+    - postgres:9.6
+  variables:
+    POSTGRES_PASSWORD: "masterypath"
+    POSTGRES_USER: "masterypath"
+    POSTGRES_DB: "masterypath"
+    POSTGRES_PORT: "5432"
+    POSTGRES_HOST: "postgres"
+  cache:
+    key: "$CI_BUILD_REF_NAME" # contains either the branch or the tag, so it's caching per branch
+    untracked: true
+    paths:
+      - "sbt-cache/.ivy.cache"
+      - "sbt-cache/.boot"
+      - "sbt-cache/.sbtboot"
+      - "sbt-cache/target"
+  artifacts:
+    untracked: true
+    paths:
+      - "${ASSEMBLY_POINT}"
+  script:
+    - cd server
+    - sbt flyway/flywayMigrate slick/slickCodegen slick/generateRepos compile
+    # - sbt test
+    - if compgen -G "${ASSEMBLY_POINT}/masterypath-io-*.tgz"; then rm ${ASSEMBLY_POINT}/masterypath-io-*.tgz; fi
+    - sbt universal:packageZipTarball
+
+staging-client-build-job:
+  stage: build
+  image:
+    name: code.solern.com:5050/masterypath/devops-build-container:latest
+  variables:
+    PROD_OR_STAGING: staging
+  artifacts:
+    untracked: true
+    paths:
+      - "${REACT_BUILD_DIR}"
+  only:
+    - master@masterypath/service-api
+  script:
+    - cd client
+    - mv ./src/auth/configuration.${PROD_OR_STAGING}.ts ./src/auth/configuration.ts
+    - yarn install
+    - yarn build
+
+staging-deploy-job:
+  stage: deploy
+  dependencies:
+    - server-build-job
+    - staging-client-build-job
+  image:
+    name: code.solern.com:5050/masterypath/devops-build-container:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay
+    CRED_FILE: /tmp/creds.json
+    PROD_OR_STAGING: staging
+  artifacts:
+    paths:
+      - "${ASSEMBLY_POINT}"
+      - "${REACT_BUILD_DIR}"
+  only:
+    - master@masterypath/service-api
+  script:
+    - docker info
+    - source ${CI_PROJECT_DIR}/server/scripts/${PROD_OR_STAGING}.env
+    - ls -l ${ASSEMBLY_POINT}
+    - echo "--- configuring flyway ---"
+    - echo "flyway.url=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}" > ${ASSEMBLY_POINT}/flyway.conf
+    - echo "flyway.user=${POSTGRES_USER}" >> ${ASSEMBLY_POINT}/flyway.conf
+    - echo "flyway.password=${POSTGRES_PASSWORD}" >> ${ASSEMBLY_POINT}/flyway.conf
+    - mkdir ${ASSEMBLY_POINT}/sql
+    - cp ${CI_PROJECT_DIR}/server/modules/flyway/migration/V*.sql ${ASSEMBLY_POINT}/sql/
+    - echo "--- copy runtime container definition to ASSEMBLY_POINT ---"
+    - cp ${CI_PROJECT_DIR}/server/deployment/runtime/Dockerfile ${ASSEMBLY_POINT}
+    - cp ${CI_PROJECT_DIR}/server/deployment/runtime/start.sh ${ASSEMBLY_POINT}
+    - echo "--- packaging client code ---"
+    - cp -r ${REACT_BUILD_DIR} ${ASSEMBLY_POINT}
+    - echo "--- Assembly Point Ready ---"
+    - ls -l ${ASSEMBLY_POINT}
+    - echo "--- Build Container ---"
+    - export MPIO_VERSION=$(grep -oP 'version := "(?:\d+\.\d+\.\d+)"' ${CI_PROJECT_DIR}/server/build.sbt | cut -d'"' -f2)
+    - export IMAGE_TAG="masterypath/service-api"
+    - docker build --build-arg MPIO_VERSION=${MPIO_VERSION} -t $IMAGE_TAG ${ASSEMBLY_POINT}
+    - docker login -u $GITLAB_DOCKER_USERNAME -p $GITLAB_DOCKER_ACCESS_TOKEN code.solern.com:5050
+    - docker tag $IMAGE_TAG code.solern.com:5050/masterypath/service-api:latest
+    - docker tag $IMAGE_TAG code.solern.com:5050/masterypath/service-api:$MPIO_VERSION
+    - docker push code.solern.com:5050/masterypath/service-api
+    - doctl auth init --access-token ${DOCTL_TOKEN}
+    - doctl registry login
+    - docker tag $IMAGE_TAG registry.digitalocean.com/masterypath/service-api:latest
+    - docker tag $IMAGE_TAG registry.digitalocean.com/masterypath/service-api:$MPIO_VERSION
+    - docker push registry.digitalocean.com/masterypath/service-api
+    - cd ${CI_PROJECT_DIR}/server/deployment/env/${PROD_OR_STAGING}/
+    - cat api-deployment.yml.template | sed "s/{{MPIO_VERSION}}/${MPIO_VERSION}/g" > api-deployment.yml
+    - doctl kubernetes cluster kubeconfig save ${PROD_OR_STAGING}
+    - kubectl apply -f config.yml
+    - kubectl apply -f api-service.yml
+    - kubectl apply -f api-deployment.yml

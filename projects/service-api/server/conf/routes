@@ -1,0 +1,82 @@
+# Members
+GET     /member/profile                                     controllers.MemberController.getProfile
+POST    /member/linkAccount                                 controllers.MemberController.linkAccount
+POST    /member/logSignIn                                   controllers.MemberController.logSignIn
+POST    /member/register                                    controllers.MemberController.register
+GET     /member/organizations                               controllers.MemberController.getOrganizations
+GET     /member/jwt/:walletID                               controllers.MemberController.getJWT(walletID: String)
+
+# Organizations
+POST    /org                                                controllers.OrganizationController.createOrg
+GET     /org/:orgID/blog                                    controllers.OrganizationController.getBlog(orgID: OrgID)
+POST    /org/:orgID/blog                                    controllers.OrganizationController.createBlog(orgID: OrgID)
+PATCH   /org/:orgID/blog                                    controllers.OrganizationController.patchBlog(orgID: OrgID)
+DELETE  /org/:orgID/blog                                    controllers.OrganizationController.deleteBlog(orgID: OrgID)
+POST    /org/:orgID/blog/build                              controllers.OrganizationController.buildBlog(orgID: OrgID)
+POST    /org/:orgID/blog/publish                            controllers.OrganizationController.publishBlog(orgID: OrgID)
+POST    /org/:orgID/blog/logo                               controllers.OrganizationController.uploadSiteLogo(orgID: OrgID)
+GET     /org/:orgID/config                                  controllers.OrganizationController.getConfig(orgID: OrgID)
+PATCH   /org/:orgID/config                                  controllers.OrganizationController.patchConfig(orgID: OrgID)
+GET     /org/:orgID/mypermissions                           controllers.OrganizationController.getMyPermissions(orgID: OrgID)
+GET     /org/:orgID/members                                 controllers.OrganizationController.getOrgMembers(orgID: OrgID)
+DELETE  /org/:orgID/member/:profileID                       controllers.OrganizationController.removeOrgMember(orgID: OrgID, profileID: ProfileID)
+GET     /org/:orgID/roles                                   controllers.OrganizationController.getRoles(orgID: OrgID)
+GET     /org/:orgID/role/:roleID/members                    controllers.OrganizationController.getRoleMembers(orgID: OrgID, roleID: RoleID)
+POST    /org/:orgID/role                                    controllers.OrganizationController.createRole(orgID: OrgID)
+PATCH   /org/:orgID/role/:roleID                            controllers.OrganizationController.patchRole(orgID: OrgID, roleID: RoleID)
+GET     /org/:orgID/role/:roleID                            controllers.OrganizationController.getRole(orgID: OrgID, roleID: RoleID)
+POST    /org/:orgID/role/:roleID/member/:profileID          controllers.OrganizationController.addRoleMember(orgID: OrgID, roleID: RoleID, profileID: ProfileID)
+DELETE  /org/:orgID/role/:roleID/member/:profileID          controllers.OrganizationController.removeRoleMember(orgID: OrgID, roleID: RoleID, profileID: ProfileID)
+POST    /org/:orgID/role/:roleID/invite                     controllers.OrganizationController.roleInvite(orgID: OrgID, roleID: RoleID)
+POST    /invite/:inviteID/join                              controllers.OrganizationController.join(inviteID: RoleInviteID)
+
+# Maps
+GET     /org/:orgID/mymaps                                                     controllers.MapController.getMyMaps(orgID: OrgID)
+POST    /org/:orgID/mymaps                                                     controllers.MapController.createMap(orgID: OrgID)
+GET     /org/:orgID/flashcardTypes                                             controllers.MapController.getFlashcardTypes(orgID: OrgID)
+GET     /org/:orgID/map/:mapID/export                                          controllers.MapController.mapContentToJson(orgID: OrgID, mapID: MapID)
+GET     /org/:orgID/map/:mapID/fork                                            controllers.MapController.forkMap(orgID: OrgID, mapID: MapID)
+GET     /org/:orgID/map/:mapID/page                                            controllers.MapController.getMapAsBlogPage(orgID: OrgID, mapID: MapID)
+GET     /org/:orgID/map/:mapID/publish                                         controllers.MapController.publishMap(orgID: OrgID, mapID: MapID)
+GET     /org/:orgID/map/:mapID/settings                                        controllers.MapController.getMapSettings(orgID: OrgID, mapID: MapID)
+PATCH   /org/:orgID/map/:mapID/settings                                        controllers.MapController.patchMapSettings(orgID: OrgID, mapID: MapID)
+POST    /org/:orgID/map/:mapID/icon                                            controllers.MapController.uploadMapIcon(orgID: OrgID, mapID: MapID)
+POST    /org/:orgID/map/:mapID/image                                           controllers.MapController.storeImageFile(orgID: OrgID, mapID: MapID)
+POST    /org/:orgID/map/:mapID/card/validate                                   controllers.MapController.validateCard(orgID: OrgID, mapID: MapID, cardType)
+POST    /org/:orgID/map/:mapID/card/:nodeID/audio                              controllers.MapController.storeAudioFile(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+GET     /org/:orgID/map/:mapID/segment/:segmentID                              controllers.MapController.mapToJson(orgID: OrgID, mapID: MapID, segmentID: SegmentID)
+GET     /org/:orgID/map/:mapID/segment/:segmentID/breadcrumb                   controllers.MapController.getBreadcrumb(orgID: OrgID, mapID: MapID, segmentID: SegmentID)
+POST    /org/:orgID/map/:mapID/segment/:segmentID/node                         controllers.MapController.createMapNode(orgID: OrgID, mapID: MapID, segmentID: SegmentID)
+PATCH   /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID                 controllers.MapController.patchMapNode(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+PATCH   /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/attributes      controllers.MapController.patchMapNodeAttributes(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+DELETE  /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID                 controllers.MapController.deleteNode(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+POST    /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/makeSubMap      controllers.MapController.convertNodeToSubMap(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+POST    /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/card            controllers.MapController.createCard(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID, cardType)
+GET     /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/card            controllers.MapController.getCardAsJSON(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+GET     /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/cardType        controllers.MapController.getCardTypeAsJSON(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+PUT     /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/card            controllers.MapController.updateCard(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID, cardType)
+POST    /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/post            controllers.MapController.createOrUpdatePost(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+PUT     /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/post            controllers.MapController.createOrUpdatePost(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+GET     /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/post            controllers.MapController.getPostAsJSON(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+DELETE  /org/:orgID/map/:mapID/segment/:segmentID/node/:nodeID/post            controllers.MapController.deletePost(orgID: OrgID, mapID: MapID, segmentID: SegmentID, nodeID: NodeID)
+GET     /org/:orgID/map/:mapID/rights                                          controllers.MapController.getMapRights(orgID: OrgID, mapID: MapID)
+POST    /org/:orgID/map/:mapID/rights                                          controllers.MapController.createMapRights(orgID: OrgID, mapID: MapID)
+POST    /org/:orgID/map/:mapID/rights/:rightsID/invite                         controllers.MapController.mapRightsInvite(orgID: OrgID, mapID: MapID, rightsID: MapRightsID)
+GET     /org/:orgID/map/:mapID/rights/:rightsID                                controllers.MapController.getMapRightsByID(orgID: OrgID, mapID: MapID, rightsID: MapRightsID)
+DELETE  /org/:orgID/map/:mapID/rights/:rightsID                                controllers.MapController.deleteMapRightsByID(orgID: OrgID, mapID: MapID, rightsID: MapRightsID)
+PATCH   /org/:orgID/map/:mapID/rights/:rightsID                                controllers.MapController.patchMapRights(orgID: OrgID, mapID: MapID, rightsID: MapRightsID)
+POST    /org/:orgID/map/:mapID/rights/:rightsID/member/:profileID              controllers.MapController.addMapRightsMember(orgID: OrgID, mapID: MapID, rightsID: MapRightsID, profileID: ProfileID)
+DELETE  /org/:orgID/map/:mapID/rights/:rightsID/member/:profileID              controllers.MapController.removeMapRightsMember(orgID: OrgID, mapID: MapID, rightsID: MapRightsID, profileID: ProfileID)
+
+# Training
+GET     /org/:orgID/train/:mapID/segment/:segmentID/cards                      controllers.TrainController.cardsToJSON(orgID: OrgID, mapID: MapID, segmentID: SegmentID)
+GET     /org/:orgID/train/:mapID/postsReadTimes                                controllers.TrainController.getPostsReadTimes(orgID: OrgID, mapID: MapID)
+GET     /org/:orgID/train/:mapID/post/:nodeID                                  controllers.TrainController.getPostAsJSON(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+POST    /org/:orgID/train/:mapID/post/:nodeID/markRead                         controllers.TrainController.markPostRead(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+POST    /org/:orgID/train/:mapID/card/:nodeID/grade                            controllers.TrainController.gradeCard(orgID: OrgID, mapID: MapID, nodeID: NodeID, cardType)
+POST    /org/:orgID/train/:mapID/card/:nodeID/quality                          controllers.TrainController.submitCardQuality(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+GET     /org/:orgID/train/:mapID/card/:nodeID                                  controllers.TrainController.getCardAsJSON(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+GET     /org/:orgID/train/:mapID/card/:nodeID/cardType                         controllers.TrainController.getCardTypeAsJSON(orgID: OrgID, mapID: MapID, nodeID: NodeID)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)

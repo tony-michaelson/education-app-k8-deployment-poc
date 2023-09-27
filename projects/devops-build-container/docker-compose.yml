@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  docker:
+    image: docker:20.10.5-dind
+    privileged: true
+    command: ["--storage-driver=overlay2"]
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+
+  runner:
+    image: masterypath.io/devops-build-container:latest
+    command: ["sleep", "infinity"]
+    depends_on:
+      - docker
+    environment:
+      DOCKER_HOST: tcp://docker:2375

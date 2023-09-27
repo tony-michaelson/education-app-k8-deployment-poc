@@ -1,0 +1,11 @@
+@(layout: String = "post", title: String, author: String, categories: String, tags: String, image: String, content: String)
+---
+layout: @(layout)
+title:  @(title)
+author: @(author)
+categories: [ @(categories) ]
+tags: [@(tags)]
+image: @(image)
+---
+
+@(content)

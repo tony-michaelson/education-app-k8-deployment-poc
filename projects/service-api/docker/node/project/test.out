@@ -1,0 +1,24 @@
+yarn run v1.22.5
+$ mocha
+
+/app/test/test.js:8
+  it("raises to n-th power", function() {
+  ^^
+
+SyntaxError: Unexpected identifier
+    at wrapSafe (internal/modules/cjs/loader.js:992:16)
+    at Module._compile (internal/modules/cjs/loader.js:1040:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1097:10)
+    at Module.load (internal/modules/cjs/loader.js:941:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:782:14)
+    at Module.require (internal/modules/cjs/loader.js:965:19)
+    at require (internal/modules/cjs/helpers.js:88:18)
+    at Object.exports.requireOrImport (/app/node_modules/mocha/lib/esm-utils.js:20:12)
+    at Object.exports.loadFilesAsync (/app/node_modules/mocha/lib/esm-utils.js:33:34)
+    at Mocha.loadFilesAsync (/app/node_modules/mocha/lib/mocha.js:427:19)
+    at singleRun (/app/node_modules/mocha/lib/cli/run-helpers.js:156:15)
+    at exports.runMocha (/app/node_modules/mocha/lib/cli/run-helpers.js:225:10)
+    at Object.exports.handler (/app/node_modules/mocha/lib/cli/run.js:366:11)
+    at /app/node_modules/yargs/lib/command.js:241:49
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

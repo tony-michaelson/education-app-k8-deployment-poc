@@ -1,0 +1,131 @@
+.addFlashCardBtn {
+    background-color: #37B8FF !important;
+    color: rgb(58, 58, 58) !important;
+    font-weight: bold !important;
+    border: 0px !important;
+}
+
+.addCategoryBtn {
+    background-color: #e0e0e0 !important;
+    color: rgb(58, 58, 58) !important;
+    font-weight: bold !important;
+    margin-right: 5px;
+    border: 0px !important;
+}
+
+.beginTrainingBtn {
+    font-weight: bold !important;
+}
+
+.btn-settings {
+    background-color: #00b8ff !important;
+}
+
+.flashCardAudioPlayer {
+    margin-top: 15px;
+}
+
+.flashCardAudioPlayer:focus {
+    outline: none;
+}
+
+.flashCard_answerTable {
+    width: 100%;
+}
+
+.flashCard_answerCellLeft {
+    width: 5%;
+}
+
+.flashCard_answerCellRight {
+    width: 95%;
+}
+
+.flashCardQuestionBox {
+    background-color: #EAEAEA;
+    padding: 10px;
+}
+
+.flashCardAnswerBox {
+    background-color: #EAEAEA;
+    padding: 10px;
+}
+
+.flashCardAnswerSelectionBox {
+    background-color: #eaeaea;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #a8a8a8;
+}
+
+.correctAnswer {
+    background-color: #ebfcee;
+    border-color: #3cc051;
+}
+
+.correctAnswerCheckbox {
+    margin-left: -20px;
+}
+
+.wrongAnswer {
+    background-color: #faeae6;
+    border-color: #ed4e2a;
+}
+
+.formLabelBoldRight {
+    font-weight: bold;
+    text-align: right;
+}
+
+.nav-tab {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ and Edge */
+    user-select: none; /* Standard syntax */
+}
+
+.nav-tab:hover {
+    background-color: rgb(255, 255, 144);
+}
+
+.nav-tab-active {
+    background-color: #FFF;
+}
+
+.modalHeaderHeight {
+    height: 74px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.trainingInfoBar {
+    z-index: 99999 !important;
+}
+
+.ideaInput {
+  position: absolute;
+  z-index: 999;
+  background-color: #5FBF5F;
+  color: #FFFFFF;
+  font-family: 'Helvetica';
+  font-weight: bold;
+  font-size: 13px;
+  line-height:13px;
+  text-align: center;
+  padding:0;
+}
+.center {
+  text-align: center
+}
+.ideaInput:focus {
+  outline: none;
+}
+.dropdown-menu li a {
+	cursor: pointer
+}
+@media (max-height: 320px) {
+	.hidden-phone-landscape {
+	  display: none;
+	}
+}

@@ -1,0 +1,7 @@
+import org.scalatest.flatspec.AnyFlatSpec
+
+class Tests extends AnyFlatSpec {
+  it should "work with example tests" in {
+    assert(Kata.hello() == "Hi")
+  }
+}

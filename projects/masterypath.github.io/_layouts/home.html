@@ -1,0 +1,138 @@
+---
+title: Jekyll Serif - Jekyll Small Business Theme
+layout: default
+bodyClass: page-home
+---
+
+<div class="intro">
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="col-12 order-2 order-md-1">
+        {{ content }}
+        {% if site.homepage.show_call_box %}
+          {% include call.html show_button=true %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if page.intro_image %}
+  <img alt={{ page.title }} class="intro-image{% if page.intro_image_absolute %} intro-image-absolute{% endif %}{% if page.intro_image_hide_on_mobile %} intro-image-hide-mobile{% endif %}" src="{{ page.intro_image | relURL }}" />
+  {% endif %}
+</div>
+
+<div class="the-problem-header"></div>
+
+<div class="strip strip-black">
+  <div class="container pt-6">
+    <div class="row justify-content-start">
+      <div class="col">
+        <p class="text-white text-48 text-line-height-normal">
+          There's so much </br> information
+        </p>
+        <div class="pl-2 text-24">
+        <p class="text-white">
+          1). Staying on top is hard
+        </p>
+        <p class="text-white">
+          2). Organizing is stressful
+        </p>
+        <p class="text-white">
+          3). Self-doubt & information anxiety are common
+        </p>
+        </br>
+        <p class="text-red text-line-height-34px">
+          Are you ready for the next job interview or knowledge test?
+        </p>
+        </div>
+      </div>
+      <div class="col">
+        <img src="/images/illustrations/woman-tmi.svg">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="the-problem-footer"></div>
+
+<div class="strip">
+  <div class="container pt-6">
+    <div class="row justify-content-start">
+      <div class="col">
+        <img src="/images/mountain-guide.png" width="450">
+      </div>
+      <div class="col">
+        <p class="text-48 text-line-height-normal">
+          We're here to guide
+        </p>
+        <div class="pl-2 text-line-height-34px text-24">
+        <p>
+          We know the pain, so we built a knowledge management system
+          based on learning science to make this a lot easier.
+        </p>
+        <p>
+          MasteryPath enables you to store knowledge, stay current on it, and deliver it to an audience.
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="blue-divider"></div>
+
+<div class="strip">
+  <div class="container pt-6">
+    <div class="row justify-content-start">
+      <div class="col">
+        <p class="text-48 text-line-height-normal">
+          How it works
+        </p>
+        <div class="pl-2 text-24">
+        <p>
+          1). Break down subjects into small pieces
+        </p>
+        <p>
+          2). Sequence them in the correct order
+        </p>
+        <p>
+          3). Add flashcards to test for retention
+        </p>
+        </div>
+      </div>
+      <div class="col">
+        <img src="/images/istockphoto-1186069458-612x612.jpg" width="450">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="black-divider"></div>
+
+<div class="strip">
+  <div class="container pt-6">
+    <div class="row justify-content-start">
+      <div class="col">
+        <img src="/images/istockphoto-889968488-612x612.jpg" width="450">
+      </div>
+      <div class="col">
+        <p class="text-48 text-line-height-normal">
+          Here's the plan
+        </p>
+        <div class="pl-2 text-24">
+        <p>
+          1). Start putting all your knowledge into MasteryPath
+        </p>
+        <p>
+          2). Train on your information with flashcards and spaced-repitition to build permanent memory
+        </p>
+        <p>
+          3). Show off your hard work and sell the training experience to paying customers.
+        </p>
+        <p>
+          <a href="{{ site.data.contact.contact_button_link }}" class="button button-primary">Start Now</a>
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

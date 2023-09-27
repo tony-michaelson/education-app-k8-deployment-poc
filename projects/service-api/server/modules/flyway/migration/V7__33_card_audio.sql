@@ -1,0 +1,1 @@
+ALTER TABLE flashcard.card ADD COLUMN audio VARCHAR(255) DEFAULT NULL;

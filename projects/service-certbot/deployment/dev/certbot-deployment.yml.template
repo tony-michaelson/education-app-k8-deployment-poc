@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mpio-certbot
+  labels:
+    app: mpio
+spec:
+  selector:
+    matchLabels:
+      app: mpio
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: web
+        service: certbot
+    spec:
+      containers:
+        - name: certbot
+          image: "{{IMAGE_PREFIX}}masterypath.io/service-certbot:{{VERSION}}"
+          imagePullPolicy: IfNotPresent
+          command: ["/app/start.sh"]
+          env:
+            - name: MQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_USERNAME
+            - name: MQ_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_PASSWORD
+            - name: ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-certbot-ssl
+                  key: ACCESS_KEY_ID
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-certbot-ssl
+                  key: ACCESS_KEY
+            - name: MQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: MQ_HOST
+            - name: SITES_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: SITES_URL
+            - name: HOSTED_ZONE_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: HOSTED_ZONE_ID 
+          volumeMounts:
+            - name: sites
+              mountPath: "/sites"
+              readOnly: false
+            - name: conf
+              mountPath: "/etc/nginx"
+          readinessProbe:  
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - /app/alive.sh
+            initialDelaySeconds: 5
+            periodSeconds: 1
+            failureThreshold: 1
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: nfs-sites-pvc
+        - name: conf
+          persistentVolumeClaim:
+            claimName: nfs-conf-pvc

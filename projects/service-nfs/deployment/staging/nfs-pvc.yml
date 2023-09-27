@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-sites-pvc
+spec:
+  storageClassName: nfs-sites
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-letsencrypt-pvc
+spec:
+  storageClassName: nfs-letsencrypt
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-conf-pvc
+spec:
+  storageClassName: nfs-conf
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-docker-images-pvc
+spec:
+  storageClassName: nfs-docker-images
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

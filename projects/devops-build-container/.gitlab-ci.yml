@@ -1,0 +1,23 @@
+before_script:
+  - docker info
+
+build-deploy-job:
+  stage: build
+  image: docker
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay
+    VERSION: "1.1"
+    KUBECTL_VERSION: "1.20.2"
+    DOCTL_VERSION: "1.60.0"
+  only:
+    - master@masterypath/devops-build-container
+  script:
+    - export IMAGE_TAG="masterypath/devops-build-container:$VERSION"
+    - docker build --build-arg VERSION=${VERSION} --build-arg KUBECTL_VERSION=${KUBECTL_VERSION} --build-arg DOCTL_VERSION=${DOCTL_VERSION} -t $IMAGE_TAG .
+    - docker login -u $GITLAB_DOCKER_USERNAME -p $GITLAB_DOCKER_ACCESS_TOKEN code.solern.com:5050
+    - docker tag $IMAGE_TAG code.solern.com:5050/masterypath/devops-build-container:latest
+    - docker tag $IMAGE_TAG code.solern.com:5050/masterypath/devops-build-container:$VERSION
+    - docker push code.solern.com:5050/masterypath/devops-build-container:latest
+    - docker push code.solern.com:5050/masterypath/devops-build-container:$VERSION

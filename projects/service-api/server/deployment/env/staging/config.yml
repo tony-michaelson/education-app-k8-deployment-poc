@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api
+data:
+  GOOGLE_APPLICATION_CREDENTIALS: '/creds/mpio-backend-staging.json'
+  GCS_PROJECT_ID: 'mpio-backend-staging'
+  GCS_IMAGE_BUCKET: 'images.staging.masterypath.io'
+  GCS_AUDIO_BUCKET: 'audio.staging.masterypath.io'
+  SITES_URL: 'sites.staging.masterypath.net'
+  SITES_DOMAIN: 'staging.masterypath.net'
+  HOSTED_ZONE_ID: 'Z08491086M16UYBGBNFC'
+  CLIENT_URL: 'https://staging.masterypath.io'
+  POSTGRES_HOST: 'private-staging-db-postgresql-ny3-do-user-8748286-0.b.db.ondigitalocean.com'
+  POSTGRES_DB: 'masterypath'
+  POSTGRES_PORT: '25060'
+  MQ_HOST: 'rabbitmq'
+  AUTH0_REDIRECT_URL: 'https://api.staging.masterypath.io'
+  AUTH0_AUDIENCE: 'https://api.staging.masterypath.io'
+  AUTH0_DOMAIN: 'masterypath.auth0.com'
+  DATABASE_URL: 'postgres://masterypath:masterypath@postgres:5432/masterypath?sslmode=disable'
+  DO_ACCESS_KEY: "YSSO2OXWYWIRYJMIGD3N"
+  DO_IMAGE_SPACE_ENDPOINT: "nyc3.digitaloceanspaces.com"
+  DO_IMAGE_SPACE_NAME: "images.staging.masterypath.io"
+  DO_AUDIO_SPACE_ENDPOINT: "nyc3.digitaloceanspaces.com"
+  DO_AUDIO_SPACE_NAME: "audio.staging.masterypath.io"
+  PLAY_HTTP_SECRET_KEY: 'cYf5U3e*8X39cYf5U3e*8X39'

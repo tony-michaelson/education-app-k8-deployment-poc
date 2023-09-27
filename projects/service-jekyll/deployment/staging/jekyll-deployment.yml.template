@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mpio-jekyll
+  labels:
+    app: mpio
+spec:
+  selector:
+    matchLabels:
+      app: mpio
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: web
+        service: jekyll
+    spec:
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: nfs-sites-pvc
+        - name: conf
+          persistentVolumeClaim:
+            claimName: nfs-conf-pvc
+      containers:
+        - name: jekyll
+          image: "registry.digitalocean.com/masterypath/service-jekyll:{{VERSION}}"
+          command: ["/app/start.sh"]
+          ports:
+            - containerPort: 8080
+              name: "jekyll-server"
+          volumeMounts:
+            - name: sites
+              mountPath: "/sites/"
+            - name: conf
+              mountPath: "/conf/"
+          readinessProbe:  
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - /app/alive.sh
+            initialDelaySeconds: 30
+            periodSeconds: 1
+            failureThreshold: 1

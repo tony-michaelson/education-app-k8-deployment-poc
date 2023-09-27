@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mpio-nginx
+  labels:
+    app: mpio
+spec:
+  selector:
+    matchLabels:
+      app: mpio
+  template:
+    metadata:
+      labels:
+        app: mpio
+        tier: web
+        service: nginx
+    spec:
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: nfs-sites-pvc
+        - name: conf
+          persistentVolumeClaim:
+            claimName: nfs-conf-pvc
+      containers:
+        - name: nginx
+          image: "registry.digitalocean.com/masterypath/service-nginx:{{VERSION}}"
+          env:
+            - name: MQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_USERNAME
+            - name: MQ_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mq
+                  key: MQ_PASSWORD
+            - name: MQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api
+                  key: MQ_HOST
+            - name: PID_FILE
+              value: "/var/run/worker.pid"
+          ports:
+            - containerPort: 80
+              name: "nginx-server"
+            - containerPort: 443
+              name: "nginx-ssl"
+          volumeMounts:
+            - mountPath: "/sites"
+              name: sites
+            - mountPath: "/etc/nginx"
+              name: conf
+          livenessProbe:
+            exec:
+              command:
+              - python3
+              - /app/is_running.py
+            initialDelaySeconds: 5
+            periodSeconds: 1
